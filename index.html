@@ -31,16 +31,16 @@
     </div>
 
     <script>
-        // Generate raindrops dynamically
         const rainContainer = document.querySelector('.rain');
-        const numberOfDrops = 100; // Number of raindrops
+        const numberOfDrops = 1
+            75;
 
         for (let i = 0; i < numberOfDrops; i++) {
             const drop = document.createElement('div');
             drop.classList.add('drop');
-            drop.style.left = `${Math.random() * 100}%`;  // Random horizontal position
-            drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`; // Random speed
-            drop.style.animationDelay = `${Math.random() * 2}s`; // Random delay
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
             rainContainer.appendChild(drop);
         }
     </script>
