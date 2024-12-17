@@ -115,23 +115,18 @@ body {
     padding-bottom: 5px;
 }
 
-.tweet-content {
-    font-size: 1.1em;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
 .social-card {
     background: rgba(0, 0, 0, 0.6);
     padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .social-links {
     list-style: none;
+    padding-left: 0;
 }
 
 .social-links li {
@@ -145,14 +140,15 @@ body {
     color: #ffffff;
     font-size: 1.1em;
     font-weight: 500;
-    padding: 10px;
-    border-radius: 30px;
+    padding: 10px 20px;
+    border-radius: 8px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin: 5px 0;
 }
 
 .social-button i {
-    margin-right: 10px;
+    margin-right: 12px;
 }
 
 .social-button:hover {
@@ -185,4 +181,18 @@ body {
 
 .social-button.github:hover {
     background-color: #444;
+}
+
+.tweet-content {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #FFDAB9;
+}
+
+hr.separator {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
 }
