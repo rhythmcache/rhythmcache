@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>who?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Poppins:wght@300;400;600&family=Lora:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+            background: url('green.png') no-repeat center center/cover;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: -1;
+        }
+
+        .rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .rain .drop {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            width: 2px;
+            height: 20px;
+            animation: fall 0.5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+            margin-right: 15px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .username {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .timestamp {
+            font-size: 0.9em;
+            color: #b0b0b0;
+        }
+
+        .social-card {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social-links {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .social-links li {
+            margin-bottom: 12px;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1em;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin: 5px 0;
+        }
+
+        .social-button i {
+            margin-right: 12px;
+        }
+
+        .social-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .social-button.telegram {
+            background-color: #0088cc;
+            color: #fff;
+        }
+
+        .social-button.telegram:hover {
+            background-color: #00c6ff;
+        }
+
+        .social-button.github {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .social-button.github:hover {
+            background-color: #444;
+        }
+
+        .tweet-content {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 400;
+            color: #FFDAB9;
+        }
+
+        hr.separator {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ffffff55, transparent);
+            margin: 20px 0;
+        }
+
+        .window-buttons {
+            display: flex;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            gap: 8px;
+        }
+
+        .window-buttons .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #bbb;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .window-buttons .dot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+        }
+
+        .window-buttons .dot.red {
+            background-color: #FF605C;
+            box-shadow: 0 0 8px rgba(255, 96, 92, 0.5);
+        }
+
+        .window-buttons .dot.yellow {
+            background-color: #FFBD44;
+            box-shadow: 0 0 8px rgba(255, 189, 68, 0.5);
+        }
+
+        .window-buttons .dot.green {
+            background-color: #00CA4E;
+            box-shadow: 0 0 8px rgba(0, 202, 78, 0.5);
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: cardAppear 1s ease-in-out forwards;
+            animation-delay: 3s;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        @keyframes cardAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .heart-fragment {
+            position: fixed;
+            width: 100px; 
+            height: 100px; 
+            background: rgba(255, 105, 180, 0.8); 
+            clip-path: path('M10,4 C10,4 8.5,0 5,0 C2.5,0 0,2.5 0,5 C0,7.5 2.5,10 5,10 C7.5,10 10,7.5 10,5');
+            animation: floatUp var(--float-duration) ease-in-out forwards;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            z-index: 2; 
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translate(var(--start-x), calc(100vh + 40px)) scale(0.5) rotate(var(--rotation));
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--end-x), var(--end-y)) scale(1.5) rotate(calc(var(--rotation) + 360deg));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rain"></div>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <div class="window-buttons">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+        </div>
+        <div class="profile-container">
+            <img src="p.jpg" alt="Profile Picture" class="profile-picture">
+            <div class="profile-info">
+                <span class="username"> 唵 </span>
+                <span class="timestamp">@rhythmcache</span>
+            </div>
+        </div>
+        <p class="tweet-content"> as if this is my last </p>
+        <hr class="separator">
+        <div class="social-card">
+            <ul class="social-links">
+                <li><a href="https://rhythmcache.t.me" target="_blank" class="social-button telegram"><i class="fab fa-telegram"></i> Telegram</a></li>
+                <li><a href="https://github.com/rhythmcache" target="_blank" class="social-button github"><i class="fab fa-github"></i> GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const rainContainer = document.querySelector('.rain');
+        const numberOfDrops = 10;
+
+        for (let i = 0; i < numberOfDrops; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            rainContainer.appendChild(drop);
+        }
+        function createHeartFragment() {
+            const fragment = document.createElement('div');
+            fragment.className = 'heart-fragment';
+
+            const startX = Math.random() * window.innerWidth;
+            const endX = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
+            const endY = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
+            const rotation = Math.random() * 360;
+            const duration = 2 + Math.random() * 2;
+
+            fragment.style.setProperty('--start-x', `${startX}px`);
+            fragment.style.setProperty('--end-x', `${endX}px`);
+            fragment.style.setProperty('--end-y', `${endY}px`);
+            fragment.style.setProperty('--rotation', `${rotation}deg`);
+            fragment.style.setProperty('--float-duration', `${duration}s`);
+            const colors = [
+                'rgba(255, 105, 180, 0.8)', 
+                'rgba(255, 20, 147, 0.8)',  
+                'rgba(255, 0, 0, 0.8)',    
+                'rgba(255, 182, 193, 0.8)',  
+                'rgba(255, 69, 0, 0.8)'  
+            ];
+            fragment.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            document.body.appendChild(fragment);
+
+            setTimeout(() => {
+                fragment.remove();
+            }, duration * 1000);
+        }
+        function startHeartAnimation() {
+
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createHeartFragment();
+                }, i * 100);
+            }
+
+            setInterval(() => {
+                createHeartFragment();
+            }, 300);
+        }
+        window.addEventListener('load', startHeartAnimation);
+    </script>
+</body>
+</html>
