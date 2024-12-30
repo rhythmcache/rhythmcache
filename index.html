@@ -38,7 +38,7 @@
             z-index: -1;
         }
 
-        .rain {
+        .snow {
             position: absolute;
             top: 0;
             left: 0;
@@ -48,19 +48,18 @@
             z-index: 1;
         }
 
-        .rain .drop {
+        .snow .flake {
             position: absolute;
-            background: rgba(255, 255, 255, 0.6);
-            width: 2px;
-            height: 20px;
-            animation: fall 0.5s linear infinite;
+            color: white;
+            font-size: 20px;
+            animation: fall linear infinite;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-100px); }
-            100% { transform: translateY(100vh); }
+        
+@keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -323,7 +322,7 @@
     </style>
 </head>
 <body>
-    <div class="rain"></div>
+    <div class="snow"></div>
     <div class="background-overlay"></div>
     <div class="container">
         <div class="window-buttons">
@@ -353,16 +352,21 @@
     </div>
 
     <script>
-        const rainContainer = document.querySelector('.rain');
-        const numberOfDrops = 10;
+        const snowContainer = document.querySelector('.snow');
+        const numberOfFlakes = 40;
 
-        for (let i = 0; i < numberOfDrops; i++) {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            drop.style.left = `${Math.random() * 100}%`;
-            drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
-            drop.style.animationDelay = `${Math.random() * 2}s`;
-            rainContainer.appendChild(drop);
+        const snowflakeCharacters = ['❄', '❅', '❆'];
+
+        for (let i = 0; i < numberOfFlakes; i++) {
+            const flake = document.createElement('span');
+            flake.classList.add('flake');
+            flake.textContent = snowflakeCharacters[Math.floor(Math.random() * snowflakeCharacters.length)];
+            flake.style.left = `${Math.random() * 100}%`;
+            flake.style.animationDuration = `${Math.random() * 10 + 10}s`; // Slower fall
+            flake.style.animationDelay = `${Math.random() * 5}s`;
+            flake.style.opacity = Math.random();
+            flake.style.fontSize = `${Math.random() * 5 + 10}px`; // Varying sizes
+            snowContainer.appendChild(flake);
         }
 
         function createHeartFragment() {
