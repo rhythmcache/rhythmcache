@@ -272,9 +272,8 @@
                 transform: translate(var(--end-x), var(--end-y)) scale(1.5) rotate(calc(var(--rotation) + 360deg));
             }
         }
-
-        /* Modal styles */
-        .modal {
+        
+        .ry {
             display: none;
             position: fixed;
             z-index: 1000;
@@ -287,11 +286,13 @@
             align-items: center;
         }
 
-        .modal-content {
+        .ry-content {
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
             animation: grow 0.5s ease-out;
+            user-select: none; 
+            -webkit-user-drag: none; 
         }
 
         @keyframes grow {
@@ -337,7 +338,7 @@
                 <span class="timestamp">@rhythmcache</span>
             </div>
         </div>
-        <p class="tweet-content"> Hello  There 👋 </p>
+        <p class="tweet-content"> Hello There 👋 </p>
         <hr class="separator">
         <div class="social-card">
             <ul class="social-links">
@@ -346,9 +347,9 @@
             </ul>
         </div>
     </div>
-    <div id="myModal" class="modal">
+    <div id="myry" class="ry">
         <span class="close">&times;</span>
-        <img class="modal-content" id="modalImage">
+        <img class="ry-content" id="ryImage">
     </div>
 
     <script>
@@ -406,26 +407,35 @@
                 createHeartFragment();
             }, 300);
         }
+
         window.addEventListener('load', startHeartAnimation);
-        const modal = document.getElementById("myModal");
+        const ry = document.getElementById("myry");
         const img = document.getElementById("profile-picture");
-        const modalImg = document.getElementById("modalImage");
+        const ryImg = document.getElementById("ryImage");
         const span = document.getElementsByClassName("close")[0];
 
         img.onclick = function() {
-            modal.style.display = 'flex';
-            modalImg.src = this.src;
+            ry.style.display = 'flex';
+            ryImg.src = this.src;
         }
 
         span.onclick = function() {
-            modal.style.display = 'none';
+            ry.style.display = 'none';
         }
 
-        modal.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
+        ry.onclick = function(event) {
+            if (event.target === ry) {
+                ry.style.display = 'none';
             }
         }
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U' || event.key === 'c' || event.key === 'C')) {
+                event.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
